@@ -16,7 +16,7 @@ export default class CurrentRead extends Component {
                         if(book.shelf === "currentlyReading")
                         {
                             return(
-                                <Book update={update} menu="Current" book={book} /> //pass the menu props which indicate which options shall appear in the context menu
+                                <Book key={book.id} update={update} menu="Current" book={book} /> //pass the menu props which indicate which options shall appear in the context menu
                             )
                         }
                     })

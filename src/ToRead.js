@@ -16,7 +16,7 @@ export default class ToRead extends Component {
                         if(book.shelf === "wantToRead")
                         {
                             return(
-                                <Book update={update} menu="ToRead" book={book} /> //pass the menu props which indicate which options shall appear in the context menu as well as the revieved props
+                                <Book key={book.id} update={update} menu="ToRead" book={book} /> //pass the menu props which indicate which options shall appear in the context menu as well as the revieved props
                             )
                         }
                     })

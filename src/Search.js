@@ -38,7 +38,7 @@ export default class Search extends Component {
                 <div className="books">
                 {
                     Array.isArray(books) ? books.map((book) => (
-                            <Book history={this.props.history} menu="new" book={book} />
+                            <Book key={book.id} history={this.props.history} menu="new" book={book} />
                         )
                     ):
                     <div>Nothing Found!</div>
