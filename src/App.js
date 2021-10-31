@@ -7,12 +7,28 @@ import * as BookAPI from './BookAPI'
 import { Route } from 'react-router'
 import Search from './Search'
 import Rate from './Rate'
+import BookSection from './BookSection'
 
 export default class App extends Component {
   
   state = {    //array of the users' books stored in state
     books: []
   }
+
+  // menuSections = [
+  //   {
+  //     title: "Currently Reading",
+  //     menu: "currentlyReading"
+  //   },
+  //   {
+  //     title: "To Read",
+  //     menu: "wantToRead"
+  //   },
+  //   {
+  //     title: "Read",
+  //     menu: "read"
+  //   }
+  // ]
 
   updateBooks = (id,shelf) => {   //function that updates books's shelf position
     console.log("Hey");
@@ -26,6 +42,14 @@ export default class App extends Component {
     this.setState( ({
       books: newBooks
     }))
+  }
+
+  addBooks = (book) => {
+    this.setState((prev) => ({
+      books: [...prev.books,book]
+    }))
+
+    // }))    
   }
 
   fetchBooks = () => {  //function that fetch all books from the server
@@ -42,6 +66,23 @@ export default class App extends Component {
   }
 
   render() {
+    const menuSections = [
+      {
+        id:0,
+        title: "Currently Reading",
+        menu: "currentlyReading"
+      },
+      {
+        id:1,
+        title: "To Read",
+        menu: "wantToRead"
+      },
+      {
+        id:2,
+        title: "Read",
+        menu: "read"
+      }  
+    ]
     const {books} = this.state
     console.log(books);
     return (
@@ -60,16 +101,19 @@ export default class App extends Component {
             </div>
           </div>
           <div className="sections">
-            <CurrentRead update={this.updateBooks} books={books} />
+            {menuSections.map((section) => (
+                <BookSection key={section.id} title={section.title} menu={section.menu} books={books} update={this.updateBooks} />
+            ))}
+            {/* <CurrentRead update={this.updateBooks} books={books} />
             <ToRead update={this.updateBooks} books={books} />
-            <Read update={this.updateBooks} books={books} />
+            <Read update={this.updateBooks} books={books} /> */}
           </div>
           <Footer />
         </div>
         )}>
       </Route>
       <Route exact path="/" render={({history}) => (
-        <Search history={history} fetch={this.fetchBooks} />
+        <Search myBooks={books} update={this.updateBooks} addBooks={this.addBooks} history={history} fetch={this.fetchBooks} />
       )}></Route>
       <Route path="/rate/:id" render={({history}) => (
         <Rate history={history} books={books} />

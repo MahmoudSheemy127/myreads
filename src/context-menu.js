@@ -18,16 +18,21 @@ export default class Context extends Component {
             this.props.update(this.props.book.id,shelf);
         }
         else{
+            const newBook = {...this.props.book,shelf:shelf}
             BookAPI.update(this.props.book,shelf).then((res) => {
                 console.log(res);
-            })
+            }).then(this.props.addBooks(newBook))
             this.props.history.push('/home');            
         }
 
+        this.setState((prev) => ({
+            menuStatus: !prev.menuStatus
+        }))
     }
 
 
     toggleMenu = () => {
+        this.props.checkShelf();
         this.setState((prev) => ({
             menuStatus: !prev.menuStatus
         }))
@@ -43,10 +48,10 @@ export default class Context extends Component {
                 <img id="menu-icon" onClick={this.toggleMenu}   src={contexticon} />
                 :
                 <div className="submenu">
-                { menu != "Current" && <div onClick={ () => this.moveToShelf("currentlyReading")}>Currently Reading</div>}
-                {menu != "ToRead" && <div onClick={() => this.moveToShelf("wantToRead")}>To Read</div> }
-                {menu != "Read" && <div onClick={() => this.moveToShelf("read")}>Read</div> }
-                {menu != "new" && <Link to={`/rate/${this.props.book.id}`}>
+                { menu == "currentlyReading" ? <div id="checked">Currently Reading &#9203;</div> :  <div onClick={ () => this.moveToShelf("currentlyReading")}>Currently Reading</div>}
+                {menu == "wantToRead" ? <div id="checked">To Read &#9203;</div> :  <div onClick={() => this.moveToShelf("wantToRead")}>To Read</div> }
+                {menu == "read" ? <div id="checked">Read &#9203;</div> : <div onClick={() => this.moveToShelf("read")}>Read</div> }
+                {menu != "new" && <Link id="rate" to={`/rate/${this.props.book.id}`}>
                 <div>Rate</div>
                 </Link>  }
                 <div onClick={this.toggleMenu}>Cancel</div>

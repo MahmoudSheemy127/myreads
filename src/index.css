@@ -133,9 +133,9 @@ code {
   background-color: #13FD46;
   border:1px solid #444;
   border-radius: 25px;
-  width: 140px;
+  width: 160px;
   cursor: pointer;
-  height: 100px;
+  height: 120px;
 }
 
 .submenu div{
@@ -144,6 +144,17 @@ code {
   border-radius: 50px; */
   text-align: center;
   width: 100%;
+}
+
+#checked{
+  cursor:no-drop;
+  /* background-color:gray; */
+}
+
+#rate{
+  width: 100%;
+  color: black;
+  text-decoration:none;
 }
 
 .submenu div:hover{
@@ -187,6 +198,7 @@ code {
   align-items: center;
   width: 300px;
 }
+
 
 .description{
   overflow-y: scroll;
@@ -317,6 +329,7 @@ background-color: darkgreen;
     color: #766565;
   }
    
+
   .book-content{
     display: flex;
     flex-direction: column;

@@ -1,5 +1,5 @@
 //class component to show the search page 
-
+    
 import React, { Component } from 'react'
 import * as BookAPI from './BookAPI'
 import Book from './Book'
@@ -38,7 +38,7 @@ export default class Search extends Component {
                 <div className="books">
                 {
                     Array.isArray(books) ? books.map((book) => (
-                            <Book key={book.id} history={this.props.history} menu="new" book={book} />
+                            <Book key={book.id} addBooks={this.props.addBooks} update={this.props.update} history={this.props.history} menu={book.shelf ? book.shelf : "new"} book={book} books={this.props.myBooks} />
                         )
                     ):
                     <div>Nothing Found!</div>
