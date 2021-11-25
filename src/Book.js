@@ -30,8 +30,8 @@ const Book = (props) => {
                 <Context checkShelf={checkShelf} addBooks={props.addBooks} history={history} update={update} book={book} menu={shelf} />  
             </div>
             <div  className="book-title">{book.title}</div>
-            <div className="book-author">{book.authors ? book.authors.map((author) => (
-                <div>{author},</div>
+            <div className="book-author">{book.authors ? book.authors.map((author,index) => (
+                <div key={index}>{author},</div>
             )) : ""}</div>
             <div className="book-rating">{book.averageRating}</div>
         </div>
